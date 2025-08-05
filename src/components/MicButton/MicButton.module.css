@@ -1,0 +1,39 @@
+.micButton {
+  position: relative;
+
+  &.active,
+  &.active:hover {
+    background-color: var(--color-bg-brand);
+  }
+
+  .timer {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: space(5);
+    display: flex;
+    align-items: center;
+    gap: space(2);
+    font-family: monospace;
+    font-size: 24px;
+
+    &::before {
+      content: "•";
+      display: block;
+      padding-top: 2px;
+      color: red;
+      animation: blink 1s steps(1, end) infinite;
+    }
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.33;
+  }
+}

@@ -1,0 +1,51 @@
+:root {
+  --radius-s: space(2);
+
+  --color-text-white: rgba(255, 255, 255, 0.87);
+  --color-text-gray-white: #999999;
+  --color-text-gray: #808080;
+  --color-text-red: indianred;
+  --color-text-green: green;
+
+  --color-bg-gray: gray;
+  --color-bg-black: #1a1a1a;
+  --color-bg-light-black: #242424;
+  --color-bg-brand: #646cff;
+
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 16px;
+
+  color-scheme: light dark;
+  color: var(--color-text-white);
+  background-color: var(--color-bg-light-black);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: var(--color-bg-brand);
+  text-decoration: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 54px;
+  line-height: 1.1;
+  margin: 0;
+}

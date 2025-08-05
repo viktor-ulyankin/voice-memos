@@ -1,0 +1,65 @@
+.button {
+  cursor: pointer;
+  transition: border-color 0.25s;
+  font-family: inherit;
+  font-weight: 500;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  &.fullWidth {
+    width: 100%;
+  }
+
+  &.primary {
+    border-radius: space(2);
+    border: 1px solid transparent;
+    background-color: var(--color-bg-black);
+
+    &:hover {
+      background-color: var(--color-bg-brand);
+    }
+  }
+
+  &.secondary {
+  }
+
+  &.ghost {
+    border-radius: space(2);
+    border: 1px solid transparent;
+    background-color: transparent;
+
+    &:hover {
+      background-color: var(--color-bg-black);
+    }
+  }
+
+  &.xs {
+    padding: space(2) space(2);
+    font-size: 13px;
+    gap: space(1);
+  }
+
+  &.md {
+    padding: space(3) space(4);
+    font-size: 16px;
+    gap: space(2);
+  }
+
+  &.lg {
+    padding: space(5) space(6);
+    font-size: 24px;
+    gap: space(3);
+  }
+
+  .icon {
+    svg {
+      display: block;
+    }
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: space(1) auto -webkit-focus-ring-color;
+  }
+}
