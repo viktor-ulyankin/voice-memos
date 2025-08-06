@@ -55,7 +55,7 @@ export const Editor = ({
         `${leftText}<b>${selectedText}</b>${CURSOR}${rightText}`
       );
     }
-  }, [isMicOn]);
+  }, [isMicOn, value, selection]);
 
   const onTranscript = (transcriptedText: string) => {
     if (transcriptedText.length) {
@@ -99,6 +99,13 @@ export const Editor = ({
       setTempValue("");
       setTempValueHTML("");
     }
+
+    // Reset cursor position
+    setTimeout(() => {
+      const len = cursorSelectionTextareaRef.current?.value.length || 0;
+
+      cursorSelectionTextareaRef.current?.setSelectionRange(len, len);
+    }, 100);
   };
 
   const handleTextareaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
