@@ -2,6 +2,7 @@ import type { IMemo } from "./types/common";
 
 export const PREVIEW_MEMO_LENGTH = 100;
 export const AUTO_SAVE_DELAY = 1000;
+export const SPEECH_RECOGNITION_LANG = "en-US";
 
 export const LS_KEY = {
   MEMOS: "LS_MEMOS_KEY",

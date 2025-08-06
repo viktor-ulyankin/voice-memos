@@ -12,7 +12,7 @@ type Props = {
 };
 
 export const MemoList = ({ list, activeId, onSelect }: Props) => {
-  const handleSelect = (e: MouseEvent<HTMLLIElement>) => {
+  const handleSelect = (e: MouseEvent<HTMLButtonElement>) => {
     const id = e.currentTarget.dataset.id;
 
     onSelect(id || null);
@@ -22,17 +22,21 @@ export const MemoList = ({ list, activeId, onSelect }: Props) => {
     <ul className={styles.list}>
       {list.map(({ id, body, updatedAt }) => {
         return (
-          <li
-            className={cn(styles.item, id === activeId && styles.active)}
-            key={id}
-            onClick={handleSelect}
-            data-id={id}
-          >
-            <span className={styles.date}>{getFormatedDate(updatedAt)}</span>
+          <li className={styles.item} key={id}>
+            <button
+              className={cn(
+                styles.itemButton,
+                id === activeId && styles.active
+              )}
+              onClick={handleSelect}
+              data-id={id}
+            >
+              <span className={styles.date}>{getFormatedDate(updatedAt)}</span>
 
-            <span className={styles.content}>
-              {body.length ? body.slice(0, PREVIEW_MEMO_LENGTH) : "New Memo"}
-            </span>
+              <span className={styles.content}>
+                {body.length ? body.slice(0, PREVIEW_MEMO_LENGTH) : "New Memo"}
+              </span>
+            </button>
           </li>
         );
       })}

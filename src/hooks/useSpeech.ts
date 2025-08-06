@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { formatPunctuation } from "../utils/speech";
+import { SPEECH_RECOGNITION_LANG } from "../constants";
 
 type UseSpeechResult = {
   text: string;
@@ -10,7 +11,9 @@ type UseSpeechResult = {
   stop: () => void;
 };
 
-export function useSpeech(lang: string = "en-US"): UseSpeechResult {
+export function useSpeech(
+  lang: string = SPEECH_RECOGNITION_LANG
+): UseSpeechResult {
   const recognitionRef = useRef<SpeechRecognition | null>(null);
   const [text, setText] = useState("");
   const [isListening, setIsListening] = useState(false);
