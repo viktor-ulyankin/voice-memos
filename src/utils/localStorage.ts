@@ -2,25 +2,31 @@ const windowLocalStorage =
   typeof window !== "undefined" ? window?.localStorage : undefined;
 
 export const ls = {
-  get(key: string) {
-    return windowLocalStorage?.getItem(key) || null;
+  get: <T>(key: string): T | null => {
+    try {
+      const stringResult = windowLocalStorage?.getItem(key);
+
+      return stringResult ? JSON.parse(stringResult) : null;
+    } catch (error) {
+      console.error("Error reading from localStorage:", error);
+      return null;
+    }
   },
-  set(key: string, value: string) {
-    if (windowLocalStorage) {
-      windowLocalStorage.setItem(key, value);
+  set<T>(key: string, value: T) {
+    try {
+      if (!windowLocalStorage) return false;
+      windowLocalStorage.setItem(key, JSON.stringify(value));
 
       return true;
+    } catch (error) {
+      console.error("Error writing to localStorage:", error);
+      return false;
     }
-
-    return false;
   },
   remove(key: string) {
-    if (windowLocalStorage) {
-      windowLocalStorage.removeItem(key);
+    if (!windowLocalStorage) return false;
+    windowLocalStorage.removeItem(key);
 
-      return true;
-    }
-
-    return false;
+    return true;
   },
 };

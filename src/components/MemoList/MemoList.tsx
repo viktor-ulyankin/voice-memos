@@ -1,6 +1,6 @@
-import type { MouseEvent } from "react";
+import { memo, type MouseEvent } from "react";
 import { PREVIEW_MEMO_LENGTH } from "../../constants";
-import type { Memo, MemoId } from "../../types/common";
+import type { Memo, MemoId } from "../../types/domain";
 import { getFormatedDate } from "../../utils/common";
 import styles from "./MemoList.module.css";
 import cn from "classnames";
@@ -11,7 +11,7 @@ type Props = {
   onSelect: (id: MemoId | null) => void;
 };
 
-export const MemoList = ({ list, activeId, onSelect }: Props) => {
+export const MemoList = memo(({ list, activeId, onSelect }: Props) => {
   const handleSelect = (e: MouseEvent<HTMLButtonElement>) => {
     const id = e.currentTarget.dataset.id;
 
@@ -42,4 +42,4 @@ export const MemoList = ({ list, activeId, onSelect }: Props) => {
       })}
     </ul>
   );
-};
+});

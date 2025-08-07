@@ -1,4 +1,4 @@
-import type { IMemo } from "./types/common";
+import type { MemoDTO } from "./types/api";
 
 export const PREVIEW_MEMO_LENGTH = 100;
 export const AUTO_SAVE_DELAY = 1000;
@@ -111,4 +111,4 @@ export const MOCK_LIST = [
     updatedAt: "2025-07-29T17:10:45.000Z",
     body: "Parish so enable innate in formed missed. Hand two was eat busy fail. Stand smart grave would in so. Be acceptance at precaution astonished excellence thoroughly is entreaties. Who decisively attachment has dispatched. Fruit defer in party me built under first. Forbade him but savings sending ham general. So play do in near park that pain.",
   },
-] as IMemo[];
+] as MemoDTO[];
