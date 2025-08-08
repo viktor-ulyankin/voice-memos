@@ -1,3 +1,5 @@
+@import "../../styles/media.css";
+
 .editor {
   width: 100%;
   flex: 1;
@@ -120,5 +122,12 @@
 
   50% {
     opacity: 0.33;
+  }
+}
+
+@media (--mobile) {
+  .textarea {
+    padding: space(2) space(3);
+    font-size: 14px;
   }
 }

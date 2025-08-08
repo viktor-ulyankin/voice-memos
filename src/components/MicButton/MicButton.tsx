@@ -64,7 +64,9 @@ export const MicButton = ({ onToggleMic, onTranscript, onFinish }: Props) => {
 
       {isListening && (
         <span className={styles.timer}>
-          <Timer />
+          <span className={styles.timerNumbers}>
+            <Timer />
+          </span>
         </span>
       )}
     </Button>
