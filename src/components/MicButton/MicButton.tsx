@@ -31,7 +31,7 @@ export const MicButton = ({ onToggleMic, onTranscript, onFinish }: Props) => {
 
   useEffect(() => {
     onToggleMic(isListening);
-  }, [isListening]);
+  }, [isListening, onToggleMic]);
 
   const handleMicButtonClick = () => {
     if (isListening) {
