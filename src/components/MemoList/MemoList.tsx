@@ -1,7 +1,7 @@
 import { memo, type MouseEvent } from "react";
 import { PREVIEW_MEMO_LENGTH } from "../../constants";
 import type { Memo, MemoId } from "../../types/domain";
-import { getFormatedDate } from "../../utils/common";
+import { getFormattedDate } from "../../utils/common";
 import styles from "./MemoList.module.css";
 import cn from "classnames";
 
@@ -31,7 +31,7 @@ export const MemoList = memo(({ list, activeId, onSelect }: Props) => {
               onClick={handleSelect}
               data-id={id}
             >
-              <span className={styles.date}>{getFormatedDate(updatedAt)}</span>
+              <span className={styles.date}>{getFormattedDate(updatedAt)}</span>
 
               <span className={styles.content}>
                 {body.length ? body.slice(0, PREVIEW_MEMO_LENGTH) : "New Memo"}

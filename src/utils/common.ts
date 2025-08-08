@@ -1,4 +1,4 @@
-export const getFormatedDate = (date: Date) => {
+export const getFormattedDate = (date: Date) => {
   const formatter = new Intl.DateTimeFormat(undefined, {
     dateStyle: "medium",
     timeStyle: "short",

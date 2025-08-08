@@ -92,6 +92,16 @@ export function useSpeech(
 
     recognitionRef.current = recognition;
     setIsSupported(true);
+
+    return () => {
+      isManuallyStopped.current = true;
+
+      try {
+        recognitionRef.current?.stop();
+      } catch {}
+
+      recognitionRef.current = null;
+    };
   }, [lang]);
 
   const start = () => {

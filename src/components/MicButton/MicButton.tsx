@@ -2,6 +2,7 @@ import styles from "./MicButton.module.css";
 import { useEffect } from "react";
 import Button from "../Button";
 import MicIcon from "../../assets/icons/mic.svg?react";
+import MicOffIcon from "../../assets/icons/mic-off.svg?react";
 import cn from "classnames";
 import Timer from "../Timer";
 import { useSpeech } from "../../hooks/useSpeech";
@@ -42,7 +43,12 @@ export const MicButton = ({ onToggleMic, onTranscript, onFinish }: Props) => {
   };
 
   if (!isSupported) {
-    return null;
+    return (
+      <div role="status" className={styles.fallback}>
+        <MicOffIcon width={16} height={16} />
+        Speech recognition is not supported in this browser.
+      </div>
+    );
   }
 
   return (

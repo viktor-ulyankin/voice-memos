@@ -6,7 +6,7 @@ import Main from "../Layout";
 // Install mock data
 const memoList = memoService.getAllMemos();
 if (memoList.length === 0) {
-  ls.set(LS_KEY.MEMOS, JSON.stringify(MOCK_LIST));
+  ls.set(LS_KEY.MEMOS, MOCK_LIST);
 }
 
 export const App = () => {

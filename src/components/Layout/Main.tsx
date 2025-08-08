@@ -71,8 +71,11 @@ export const Main = () => {
 
   const debouncedUpdateMemo = useFunctionDebounce((value: string) => {
     if (activeMemo && isBodyChanged) {
-      updateMemo(activeMemo.id, value);
-      setIsBodyChanged(false);
+      const isSuccess = updateMemo(activeMemo.id, value);
+
+      if (isSuccess) {
+        setIsBodyChanged(false);
+      }
     }
   }, AUTO_SAVE_DELAY);
 

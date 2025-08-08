@@ -3,7 +3,7 @@ import TrashIcon from "../../assets/icons/trash.svg?react";
 import CheckIcon from "../../assets/icons/check.svg?react";
 import LoaderIcon from "../../assets/icons/loader.svg?react";
 import {
-  getFormatedDate,
+  getFormattedDate,
   lowercaseFirstChar,
   splitTextBySelection,
 } from "../../utils/common";
@@ -127,7 +127,7 @@ export const Editor = memo(
                 className={cn(styles.icon, styles.loader)}
               />
 
-              <span>Saveing...</span>
+              <span>Saving...</span>
             </span>
           ) : (
             <span className={styles.status}>
@@ -141,7 +141,7 @@ export const Editor = memo(
             </span>
           )}
 
-          <div>{getFormatedDate(date)}</div>
+          <div>{getFormattedDate(date)}</div>
 
           <Button
             variant="ghost"
@@ -149,6 +149,7 @@ export const Editor = memo(
             startIcon={<TrashIcon width={14} height={14} />}
             className={styles.deleteButton}
             onClick={onRemove}
+            aria-label="Delete memo"
           />
         </div>
 

@@ -27,6 +27,15 @@
   }
 }
 
+.fallback {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: space(2);
+  font-size: 14px;
+  color: var(--color-text-gray);
+}
+
 @keyframes blink {
   0%,
   100% {
