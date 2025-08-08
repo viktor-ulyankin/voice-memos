@@ -1,69 +1,186 @@
-# React + TypeScript + Vite
+# Voice Memos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A voice memo application built with React and TypeScript with real-time speech recognition support.
 
-Currently, two official plugins are available:
+## Idea and Concept
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Voice Memos app is created to solve the everyday task of quickly creating and managing text notes using voice input. The main idea is seamless integration of voice input with traditional text editing, providing maximum productivity and usability.
 
-## Expanding the ESLint configuration
+### Key design principles:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **Voice-first**: Voice input is the primary interaction method, text editing is supplementary
+2. **Real-time**: Instant speech-to-text transcription without delays
+3. **Intelligent processing**: Automatic punctuation and text formatting
+4. **Minimalism**: Clean interface without distracting elements
+5. **Autonomy**: Full offline functionality, all data stored locally
 
-```js
-export default tseslint.config([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
+## Architecture and Technical Solutions
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Architectural principles
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+The application is built on **component architecture** with clear separation of concerns:
+
+#### 1. Data Layer
+
+```
+services/memoService.ts - Business logic for memo operations
+utils/localStorage.ts - Abstraction over browser storage
+types/ - Data typing (domain.ts, api.ts)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+#### 2. State Layer
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
-
-export default tseslint.config([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
 ```
+hooks/useMemoManager.ts - Memo state management
+hooks/useSpeech.ts - Speech recognition management
+hooks/useCursorSelection.ts - Cursor position tracking
+```
+
+#### 3. Presentation Layer
+
+```
+components/ - React components with modular CSS styles
+Layout/Main.tsx - Main application container
+```
+
+### Key technical solutions
+
+#### 1. State management
+
+Instead of external state libraries, **React hooks composition** is used:
+
+- `useMemoManager` - central hook for memo management
+- Local component state for UI-specific logic. However, when scaling the app, a state manager should be used.
+
+#### 2. Speech processing
+
+Custom wrapper over **Web Speech API** with solutions for its limitations:
+
+- For example, bypassing the 60-second limit
+
+#### 3. Intelligent text processing
+
+Automatic formatting system created:
+
+- Recognition of voice punctuation commands ("comma", "period", "question mark" and "exclamation mark")
+- Automatic capitalization after punctuation marks
+- Smart space insertion during voice input
+
+#### 4. Auto-save with debouncing
+
+### Architectural patterns
+
+#### 1. Service Layer Pattern
+
+All business logic is encapsulated in services:
+
+```typescript
+export const memoService = {
+  getAllMemos(): Memo[],
+  saveAllMemos(memos: Memo[]): boolean,
+  createEmptyMemo(): Memo,
+  // ...
+}
+```
+
+#### 2. Repository Pattern
+
+Abstraction over localStorage for unified data operations:
+
+```typescript
+export const ls = {
+  get<T>(key: string): T | null,
+  set<T>(key: string, value: T): boolean,
+  remove(key: string): void
+}
+```
+
+#### 3. Transformer Pattern
+
+Separation of data models for API and domain:
+
+```typescript
+export const memoTransformers = {
+  serialize: (memo: Memo): MemoDTO,
+  deserialize: (dto: MemoDTO): Memo
+}
+```
+
+## UX/UI Solutions
+
+### 1. Visual feedback
+
+- **Real-time**: Highlighting of recognized text during recording
+- **Status indicators**: "Saving..." / "Saved" with animated icons
+- **Active state**: Visual highlighting of active memo and record button
+
+### 2. Intelligent input
+
+- **Contextual insertion**: Smart positioning of voice text at selected position
+- **Selection preservation**: Remembering cursor position for precise insertion
+- **Formatting**: Automatic addition of spaces and capital letters
+
+### 3. Responsiveness
+
+- **CSS Grid/Flexbox**: Adaptive two-column layout
+- **CSS Custom Properties**: Centralized color and size system
+- **Media queries**: Minimal optimization for mobile devices
+
+## Technology Stack
+
+- **React 19** - UI library with latest features
+- **TypeScript** - Static typing for reliability
+- **Vite** - Fast build and development
+- **CSS Modules** - Isolated component styles
+- **ESLint** - Code linting
+- **Vitest** - Testing
+- **PostCSS** - CSS processing
+- **SVGR** - SVG processing as components
+
+## Quick Start
+
+### Requirements
+
+- Node.js 18+
+- Google Chrome browser
+
+### Installation and launch
+
+```bash
+# Clone repository
+git clone <repository-url>
+cd voice-memos
+
+# Install dependencies
+npm install
+
+# Run in development mode
+npm run dev
+
+# Build for production
+npm run build
+
+# Deploy to GitHub Pages
+npm run deploy
+```
+
+### Testing
+
+```bash
+# Run tests
+npm test
+
+# Linting
+npm run lint
+```
+
+## Future Development
+
+- Group memos by days
+- Full-text search through memos
+- Language selection, including for SpeechRecognition
+- i18n
+- Dark/light theme design
+- Export memos
+- More tests, but better e2e
+- Simple state manager like Zustand
