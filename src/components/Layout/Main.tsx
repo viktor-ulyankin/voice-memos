@@ -61,7 +61,7 @@ export const Main = () => {
 
   const handleMemoRemove = () => {
     if (activeMemoId) {
-      let isConfirm = confirm("Delete the memo?");
+      const isConfirm = confirm("Delete the memo?");
 
       if (isConfirm) {
         deleteMemo(activeMemoId);

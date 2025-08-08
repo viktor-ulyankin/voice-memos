@@ -21,7 +21,7 @@ export const MicButton = ({ onToggleMic, onTranscript, onFinish }: Props) => {
     if (text.length) {
       onTranscript(text);
     }
-  }, [text]);
+  }, [text, onTranscript]);
 
   useEffect(() => {
     if (error) {

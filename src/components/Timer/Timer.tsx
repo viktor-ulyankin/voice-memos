@@ -23,8 +23,8 @@ export const Timer = () => {
   const hundredths = Math.floor((timeElapsed % 1000) / 10);
 
   return (
-    <div>
+    <>
       {String(seconds).padStart(2, "0")}:{String(hundredths).padStart(2, "0")}
-    </div>
+    </>
   );
 };
