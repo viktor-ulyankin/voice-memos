@@ -72,10 +72,18 @@ Automatic formatting system created:
 
 #### 1. Service Layer Pattern
 
-All business logic is encapsulated in services:
+All business logic is encapsulated in services with dependency injection:
 
 ```typescript
-export const memoService = {
+interface IStorage {
+  get<T>(key: string): T | null;
+  set<T>(key: string, value: T): boolean;
+  remove(key: string): void;
+}
+
+class MemoService {
+  constructor(private storage: IStorage) {}
+  
   getAllMemos(): Memo[],
   saveAllMemos(memos: Memo[]): boolean,
   createEmptyMemo(): Memo,

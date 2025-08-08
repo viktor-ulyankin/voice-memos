@@ -1,7 +1,10 @@
 import { useState, useCallback, useEffect, useMemo } from "react";
 import { showError } from "../utils/common";
 import type { Memo, MemoId } from "../types/domain";
-import { memoService } from "../services/memoService";
+import { MemoService } from "../services/memoService";
+import { ls } from "../utils/localStorage";
+
+const memoService = new MemoService(ls);
 
 export function useMemoManager() {
   const [memos, setMemos] = useState<Memo[]>([]);
