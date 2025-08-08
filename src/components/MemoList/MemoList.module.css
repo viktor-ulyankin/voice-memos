@@ -25,6 +25,7 @@
   height: 72px;
   overflow: hidden;
   cursor: pointer;
+  color: var(--color-text-white);
 
   &:hover {
     background-color: var(--color-bg-gray);
